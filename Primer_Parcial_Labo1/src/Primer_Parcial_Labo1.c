@@ -28,26 +28,45 @@ int main(void) {
  *
 {1003, Bombardier}
  */
-	eMarca arrayMarcas[TAM_MAR] = {{1002,"Boeing",0},{101,"Airbus",0},{1003,"ATR",0},{1004,"Bombardier",0}};
+	eMarca arrayMarcas[TAM_MAR] = {
+			{1002,"Boeing",0},
+			{1001,"Airbus",0},
+			{1003,"ATR",0},
+			{1004,"Bombardier",0}
+	};
 	eViaje arrayViajes[TAM_VIA] = {
-			{100, "Salta", 1462,0},
-			{101, "Tucuman", 1247,0},
-			{102, "Neuquen", 1139,0},
+			{100, "Salta", 1462.5,0},
+			{101, "Tucuman", 1247.6,0},
+			{102, "Neuquen", 1139.4,0},
 			{103, "Corrientes", 670},
-			{104, "Chubut", 1735,0}};
+			{104, "Chubut", 1735.8,0}};
 
-    eAvion arrayAviones[TAM_AVION];
+	/*
+	 int idAvion;
+     int matricula;
+     int idViaje;
+     int idMarca;
+     int modelo;
+     int cantAsientos;
+     int isEmpty;
+	 */
+
+    eAvion arrayAviones[TAM_AVION] = {
+    		{500,{6,9,2021},2500,100,1002,1998,20,0},
+			{501,{23,11,2021},2500,103,1001,2004,60,0},
+			{502,{4,1,2022},4000,104,1004,1999,50,0}
+    };
 
     //int idMarca = 1000;
     //int idViaje = 100;
     int idAvion = 500;
 
 	char salir = 'n';
-	inicializarArrayAviones(arrayAviones,TAM_AVION);
+	//inicializarArrayAviones(arrayAviones,TAM_AVION);
 	do{
 		switch(menuOpciones()){
 		case 1:
-			if(altaAviones(arrayAviones,TAM_AVION,&idAvion,arrayViajes,TAM_VIA,arrayMarcas,TAM_MAR)){
+			if(altaAviones(arrayAviones,TAM_AVION,&idAvion,arrayViajes,TAM_VIA,arrayMarcas,TAM_MAR) == 1){
 				printf("Alta exitosa!!! \n");
 			}
 			else{
@@ -76,13 +95,14 @@ int main(void) {
 		case 4:
 			if(arrayVacioAvion(arrayAviones,TAM_AVION) == -1){
 			mostrarAviones(arrayAviones,TAM_AVION,arrayViajes,TAM_VIA,arrayMarcas,TAM_MAR);
-			printf("Ordenando...");
-			ordenarAvionPorCantidadAsientos(arrayAviones,TAM_AVION);
+			printf("Ordenando... \n");
+			ordenarAvionPorMarca(arrayAviones,TAM_AVION,arrayMarcas,TAM_MAR);
 			mostrarAviones(arrayAviones,TAM_AVION,arrayViajes,TAM_VIA,arrayMarcas,TAM_MAR);
 			}
 			else{
 			printf("Primero debe dar de alta algun avion \n");
 			}
+			system("pause");
 
 	    break;
 		case 5:

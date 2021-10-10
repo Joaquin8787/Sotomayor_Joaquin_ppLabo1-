@@ -10,6 +10,7 @@
 #include <ctype.h>
 #include <string.h>
 #include "marca.h"
+#include "joaquin.h"
 
 int arrayVacioMarcas(eMarca aMarcas[], int tamM){
     int retorno = 1;
@@ -26,50 +27,51 @@ int altaMarca(eMarca aMarcas[],int tamM,int* idMarcas){
     int retorno = -1;
     int posicion;
     char seguir = 's';
+    char auxDescripcion[20];
 
      if(aMarcas != NULL && idMarcas != NULL &&tamM > 0){
-         do{
+    do{
     if(buscarLibreMarca(aMarcas,tamM, &posicion) == 1){
-
-        printf("Ingrese el nombre de la marca: \n");
-        fflush(stdin);
-        scanf("%[^\n]",aMarcas[posicion].descripcion);
-        aMarcas[posicion].isEmpty = 0;
-        aMarcas[posicion].id = *idMarcas;
-        (*idMarcas)++;
-        retorno = 1;
+    	if(joaquin_getNombre(auxDescripcion, "Ingrese el nombre de la marca: \n", "ERROR, tipo de dato no valido\n", 20, 2) == 0){
+    		strcpy(aMarcas[posicion].descripcion, auxDescripcion);
+    		aMarcas[posicion].isEmpty = 0;
+    	    aMarcas[posicion].id = *idMarcas;
+    		(*idMarcas)++;
+    		retorno = 1;
+    	}
     }
     else{
         printf("No hay posiciones disponible para ingresar otra marca");
     }
-    printf("Desea ingresar otra marca?: \n");
-    fflush(stdin);
-    scanf("%c", &seguir);
+    joaquin_getCaracter(&seguir, "Desea dar de alta otra marca? \n (s/n): ", "ERROR \n",'s','n', 2);
     }while(seguir == 's');
-    } //IF Inicio
+    }
     return retorno;
 }
 int bajaMarcas(eMarca aMarcas[],int tamM){
     int retorno = -1;
     int idMarcas;
     int posicion;
+    char confirmar;
     char seguir = 's';
     if(aMarcas != NULL && tamM > 0){
-        do{
+    do{
     mostrarMarcas(aMarcas,tamM);
-    printf("\n Ingrese el id de la marca que quiere dar de baja: ");
-    scanf("%d", &idMarcas);
+    joaquin_getNumero(&idMarcas,"Ingrese el id de la marca que quiere dar de baja: ", "ERROR. el id del avion debe ser a partir del 1000",500,1000,2);
     posicion = buscarMarcaId(aMarcas,tamM,&idMarcas);
+    //valido que el id de la marca que ingreso el usuario este dado de alta
     while(posicion == -1){
     	mostrarMarcas(aMarcas,tamM);
-    	printf("\n Ingrese el id de la marca que quiere dar de baja: ");
-    	scanf("%d", &idMarcas);
+    	joaquin_getNumero(&idMarcas,"Ingrese el id de la marca que quiere dar de baja: ", "ERROR. el id del avion debe ser a partir del 1000",500,1000,2);
     	posicion = buscarMarcaId(aMarcas,tamM,&idMarcas);
     }
-       aMarcas[posicion].isEmpty = 1;
-       retorno = 1;
-    printf("Desea dar de baja otra marca? \n");
-    fflush(stdin);
+    joaquin_getCaracter(&confirmar, "Esta seguro que quiere eliminar esta marca?\n (s/n): ", "ERROR \n",'s','n', 2);
+    if(confirmar == 's'){
+    	aMarcas[posicion].isEmpty = 1;
+    	retorno = 1;
+    }
+
+    joaquin_getCaracter(&seguir, "Desea dar de baja otra marca? \n (s/n): ", "ERROR \n",'s','n', 2);
     scanf("%c", &seguir);
     }while(seguir == 's');
     }
@@ -117,13 +119,17 @@ int mostrarMarcas(eMarca aMarcas[],int tamM)
 {
     int retorno = -1;
     if(aMarcas != NULL &&tamM >0){
-        printf("idMarca    descripcion \n");
+    printf("-------------------------------------------\n");
+    printf("-------------------------------------------\n");
+    printf("idMarca    descripcion \n");
     for (int i=0; i<tamM; i++)
     {
         if(aMarcas[i].isEmpty == 0){
         mostrarMarca(aMarcas[i].id, aMarcas,tamM);
         }
     }
+    printf("-------------------------------------------\n");
+    printf("-------------------------------------------\n");
     retorno = 1;
     }
     return retorno;

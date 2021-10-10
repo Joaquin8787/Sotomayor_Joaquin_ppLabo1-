@@ -10,6 +10,7 @@
 #include <ctype.h>
 #include <string.h>
 #include "viaje.h"
+#include "joaquin.h"
 
 int arrayVacioViajes(eViaje aViajes[], int tamV){
     int retorno = 1;
@@ -26,26 +27,24 @@ int arrayVacioViajes(eViaje aViajes[], int tamV){
 int altaViaje(eViaje aViajes[],int tamV,int* idViaje){
     int retorno = -1;
     int posicion;
+    char auxDescripcion[20];
     char seguir = 's';
 
-     if(aViajes != NULL && idViaje != NULL &&tamV > 0){
-         do{
+    if(aViajes != NULL && idViaje != NULL &&tamV > 0){
+    do{
     if(buscarLibreViaje(aViajes,tamV, &posicion) == 1){
 
-        printf("Ingrese el nombre del viaje: \n");
-        fflush(stdin);
-        scanf("%[^\n]",aViajes[posicion].descripcion);
-        aViajes[posicion].isEmpty = 0;
-        aViajes[posicion].idViaje = *idViaje;
-        (*idViaje)++;
-        retorno = 1;
+    if(joaquin_getNombre(auxDescripcion, "Ingrese el nombre del viaje: \n", "ERROR, tipo de dato no valido\n", 20, 2) == 0){
+    	 aViajes[posicion].isEmpty = 0;
+    	 aViajes[posicion].idViaje = *idViaje;
+    	 (*idViaje)++;
+    	 retorno = 1;
+    }
     }
     else{
         printf("No hay posiciones disponible para ingresar otr viaje");
     }
-    printf("Desea ingresar otro viaje?: \n");
-    fflush(stdin);
-    scanf("%c", &seguir);
+    joaquin_getCaracter(&seguir, "Desea dar de alta otro viaje? \n (s/n): ", "ERROR \n",'s','n', 2);
     }while(seguir == 's');
     } //IF Inicio
     return retorno;
@@ -54,24 +53,25 @@ int bajaViajes(eViaje aViajes[],int tamV){
     int retorno = -1;
     int idViaje;
     int posicion;
+    char confirmar;
     char seguir = 's';
     if(aViajes != NULL && tamV > 0){
         do{
     mostrarViajes(aViajes,tamV);
-    printf("\n Ingrese el id del viaje que quiere dar de baja: ");
-    scanf("%d", &idViaje);
+    joaquin_getNumero(&idViaje,"Ingrese el id del viaje que quiere dar de baja: ", "ERROR. el id del avion debe ser a partir del 100",100,1000,2);
     posicion = buscarViajeId(aViajes,tamV,&idViaje);
+    //Valido
     while(posicion == -1){
     	mostrarViajes(aViajes,tamV);
-    	printf("\n ERROR. Ingrese el id del viaje que quiere dar de baja: ");
-    	scanf("%d", &idViaje);
+    	joaquin_getNumero(&idViaje,"Ingrese el id del viaje que quiere dar de baja: ", "ERROR. el id del avion debe ser a partir del 100",100,1000,2);
     	posicion = buscarViajeId(aViajes,tamV,&idViaje);
     }
-       aViajes[posicion].isEmpty = 1;
-       retorno = 1;
-    printf("Desea dar de baja otro viaje? \n");
-    fflush(stdin);
-    scanf("%c", &seguir);
+    joaquin_getCaracter(&confirmar, "Esta seguro que quiere eliminar esta marca?\n (s/n): ", "ERROR \n",'s','n', 2);
+    if(confirmar == 's'){
+    	aViajes[posicion].isEmpty = 1;
+    	retorno = 1;
+    }
+    joaquin_getCaracter(&seguir, "Desea dar de alta otro viaje? \n (s/n): ", "ERROR \n",'s','n', 2);
     }while(seguir == 's');
     }
     return retorno;
@@ -103,13 +103,13 @@ int buscarViajeId(eViaje aViajes[], int tamV, int* idViaje){
 }
 
 
-int mostrarViaje(int idViaje,int kms, eViaje aViajes[],int tamV)
+int mostrarViaje(int idViaje,float kms, eViaje aViajes[],int tamV)
 {
     int retorno = -1;
     char descripcion[20];
     if(descripcion != NULL && aViajes != NULL){
     cargarDescripcionViajeDesdeId(idViaje,aViajes,tamV,descripcion);
-    printf("%d              %-20s      %d  \n", idViaje, descripcion, kms);
+    printf("%d              %-20s      %.2f  \n", idViaje, descripcion, kms);
     retorno = 1;
     }
   return retorno;
@@ -119,6 +119,8 @@ int mostrarViajes(eViaje aViajes[],int tamV)
 {
     int retorno = -1;
     if(aViajes != NULL &&tamV >0){
+    printf("-------------------------------------------\n");
+    printf("-------------------------------------------\n");
     printf("idViaje    descripcion      kms\n");
     for(int i=0; i<tamV; i++)
     {
@@ -127,9 +129,11 @@ int mostrarViajes(eViaje aViajes[],int tamV)
         aViajes[i].kms,
         aViajes,
         tamV);
+        retorno = 1;
         }
     }
-    retorno = 1;
+    printf("-------------------------------------------\n");
+    printf("-------------------------------------------\n");
     }
     return retorno;
 }

@@ -16,10 +16,10 @@
 typedef struct{
      int idViaje;
      char descripcion[TEXT_SIZE];
-     int kms;
+     float kms;
      int isEmpty;
 }eViaje;
-int mostrarViaje(int idViaje,int kms, eViaje aViajes[],int tamV);
+int mostrarViaje(int idViaje,float kms, eViaje aViajes[],int tamV);
 int mostrarViajes(eViaje aViajes[],int tamV);
 int arrayVacioViajes(eViaje aViajes[], int tamV);
 

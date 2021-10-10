@@ -8,21 +8,22 @@
 
 #include "joaquin.h"
 
+//GET NUMERO
 static int getInt(int* pResultado);
 static int myGets(char* cadena, int longitud);
 static int esNumerico(char* cadena, int limite);
-
+//GET CARACTER
 static int getCharacter(char* pResultado);
 static int myGetsChar(char* cadena, int longitud);
 static int esCaracter(char* cadena, int limite);
-
+//GET NOMBRE
 static int getCadenaChar(char* pResultado);
 static int esNombre(char* cadena, int limite);
-
+//GET NUMERO FLOTANTE
 static int getFloat(float* pResultado);
 static int esNumeroFlotante(char* cadena, int limite);
 
-
+//GET TEXTO ESPECIAL
 static int esTextoEspecial(char* cadena, int limite);
 static int getTextoEspecial(char* pResultado);
 
@@ -30,7 +31,7 @@ static int getTextoEspecial(char* pResultado);
 
 int menuOpciones()
 {
-    int retorno=0;
+    int retorno = -1;
     system("cls");
     printf("      *** MENU ***\n");
     printf("1) ALTA AVION \n");
@@ -40,9 +41,9 @@ int menuOpciones()
     printf("5) LISTAR VIAJES\n");
     printf("6) LISTAR MARCAS\n");
     printf("7) Salir.\n");
-    if(joaquin_getNumero(&retorno, "Ingrese una opcion: ","ERROR, opcion invalida.\n",1,21,10)==-1)
+    if(joaquin_getNumero(&retorno, "Ingrese una opcion: ","ERROR, opcion invalida.\n",1,7,10) == 0)
     {
-        retorno=-1;
+       return retorno;
     }
     return retorno;
 }
@@ -76,7 +77,7 @@ int joaquin_getNumero(int* pResultado, char* mensaje, char* mensajeError, int mi
             if(getInt(&bufferInt)==0 && bufferInt>=minimo && bufferInt<=maximo)
             {
                 *pResultado = bufferInt;
-                retorno = 0;
+                retorno = 1;
                 break;
             }
             reintentos--;
