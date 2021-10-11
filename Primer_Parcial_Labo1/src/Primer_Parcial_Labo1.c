@@ -24,13 +24,11 @@
 
 int main(void) {
 	setbuf(stdout, NULL);
-/*
- *
-{1003, Bombardier}
- */
+
+	int opcionMenu;
 	eMarca arrayMarcas[TAM_MAR] = {
-			{1002,"Boeing",0},
-			{1001,"Airbus",0},
+			{1001,"Boeing",0},
+			{1002,"Airbus",0},
 			{1003,"ATR",0},
 			{1004,"Bombardier",0}
 	};
@@ -53,7 +51,7 @@ int main(void) {
 
     eAvion arrayAviones[TAM_AVION] = {
     		{500,{6,9,2021},2500,100,1002,1998,20,0},
-			{501,{23,11,2021},2500,103,1001,2004,60,0},
+			{501,{23,11,2021},2500,103,1002,2004,60,0},
 			{502,{4,1,2022},4000,104,1004,1999,50,0}
     };
 
@@ -64,7 +62,8 @@ int main(void) {
 	char salir = 'n';
 	//inicializarArrayAviones(arrayAviones,TAM_AVION);
 	do{
-		switch(menuOpciones()){
+		menuOpciones(&opcionMenu);
+		switch(opcionMenu){
 		case 1:
 			if(altaAviones(arrayAviones,TAM_AVION,&idAvion,arrayViajes,TAM_VIA,arrayMarcas,TAM_MAR) == 1){
 				printf("Alta exitosa!!! \n");
@@ -95,25 +94,24 @@ int main(void) {
 		case 4:
 			if(arrayVacioAvion(arrayAviones,TAM_AVION) == -1){
 			mostrarAviones(arrayAviones,TAM_AVION,arrayViajes,TAM_VIA,arrayMarcas,TAM_MAR);
-			printf("Ordenando... \n");
+			printf("ORDENANDO... \n");
+			getchar();
 			ordenarAvionPorMarca(arrayAviones,TAM_AVION,arrayMarcas,TAM_MAR);
 			mostrarAviones(arrayAviones,TAM_AVION,arrayViajes,TAM_VIA,arrayMarcas,TAM_MAR);
 			}
 			else{
 			printf("Primero debe dar de alta algun avion \n");
 			}
-			system("pause");
-
+			getchar();
 	    break;
 		case 5:
-
 			if(arrayVacioViajes(arrayViajes,TAM_VIA)==-1){
 			mostrarViajes(arrayViajes,TAM_VIA);
 			}
 			else{
 			printf("Primero debe dar de alta algun viaje \n");
 			}
-			system("pause");
+			getchar();
 		break;
 		case 6:
 			if(arrayVacioMarcas(arrayMarcas,TAM_MAR)==-1){
@@ -122,15 +120,13 @@ int main(void) {
 			else{
 			printf("Primero debe dar de alta algun viaje \n");
 			}
-			system("pause");
+			getchar();
 		break;
 		case 7:
 			printf("Esta seguro de que quiere salir? \n");
 		    fflush(stdin);
 		    scanf("%c",&salir);
 	   break;
-
-
 		}
 
 	}while(salir == 'n' );

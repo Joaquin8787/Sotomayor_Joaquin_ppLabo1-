@@ -78,30 +78,30 @@ int altaAviones(eAvion aAviones[],int tamA,int* idAvion,eViaje aViajes[],int tam
 	        	aAviones[posicion].fecha = auxFecha;
 	        }
 	    	mostrarViajes(aViajes,tamV);
-	    	joaquin_getNombre(auxViaje, "\n Ingrese el nombre del viaje que realiza: \n", "ERROR, tipo de dato no valido\n", 20, 2);
+	    	joaquin_getNombre(auxViaje, "Ingrese el nombre del viaje que realiza: \n", "ERROR, tipo de dato no valido\n", 20, 2);
 	        idAuxV = mostrarIdViajeDesdeDescripcion(aViajes,tamV, auxViaje);
 	        while(idAuxV == -1){
 	        printf("El nombre del viaje que ingreso no es valido. \n");
 	        mostrarViajes(aViajes,tamV);
-	        joaquin_getNombre(auxViaje, "\n Ingrese el nombre del viaje que realiza: \n", "ERROR, tipo de dato no valido\n", 20, 2);
+	        joaquin_getNombre(auxViaje, "Ingrese el nombre del viaje que realiza: \n", "ERROR, tipo de dato no valido\n", 20, 2);
 	        idAuxV = mostrarIdViajeDesdeDescripcion(aViajes,tamV, auxViaje);
 	        }
 	        aAviones[posicion].idViaje = idAuxV;
 
 	        mostrarMarcas(aMarcas,tamM);
-	        joaquin_getNombre(auxMarca, "\n Ingrese el nombre de la marca del avion: \n","ERROR, tipo de dato no valido\n", 20, 2);
+	        joaquin_getNombre(auxMarca, "Ingrese el nombre de la marca del avion: \n","ERROR, tipo de dato no valido\n", 20, 2);
 	        idAuxM = mostrarIdMarcaDesdeDescripcion(aMarcas,tamM, auxMarca);
 	        while(idAuxM == -1){
 	        printf("El nombre de la marca que ingreso no es valido. \n");
 	        mostrarMarcas(aMarcas,tamM);
-	        joaquin_getNombre(auxMarca, "\n Ingrese el nombre de la marca del avion: \n","ERROR, tipo de dato no valido\n", 20, 2);
+	        joaquin_getNombre(auxMarca, "Ingrese el nombre de la marca del avion: \n","ERROR, tipo de dato no valido\n", 20, 2);
 	        idAuxM = mostrarIdMarcaDesdeDescripcion(aMarcas,tamM, auxMarca);
 	       }
 	        aAviones[posicion].idMarca = idAuxM;
 
-	        if(joaquin_getNumero(&auxModelo,"Ingrese el modelo del avion(1995/2021): ", "ERROR. Ingrese el modelo del avion: ",1995,2021,2)
-	        &&joaquin_getNumero(&auxMatricula,"Ingrese la matricula del avion(1000/5000): ", "ERROR. Ingrese la matricula del avion: ",1000,5000,2)
-	        &&joaquin_getNumero(&auxCantAsientos,"Ingrese la cantidad de asientos que tiene el avion(30/80): ", "ERROR. Ingrese la cantidad de asientos que tiene el avion: ",30,80,2)){
+	        if(joaquin_getNumero(&auxModelo,"Ingrese el modelo del avion(1995/2021): \n", "ERROR!!!\n",1995,2021,2)
+	        &&joaquin_getNumero(&auxMatricula,"Ingrese la matricula del avion(1000/5000):  \n", "ERROR!!!\n",1000,5000,2)
+	        &&joaquin_getNumero(&auxCantAsientos,"Ingrese la cantidad de asientos que tiene el avion(30/80):  \n", "ERROR!!!\n",30,80,2)){
 	        	aAviones[posicion].modelo = auxModelo;
 	            aAviones[posicion].matricula = auxMatricula;
 	        	aAviones[posicion].cantAsientos = auxCantAsientos;
@@ -115,7 +115,7 @@ int altaAviones(eAvion aAviones[],int tamA,int* idAvion,eViaje aViajes[],int tam
 	    else{
 	        printf("No hay posiciones disponible para ingresar otro avion \n ");
 	    }
-	    joaquin_getCaracter(&seguir, "Desea dar de alta otro avion? \n (s/n): ", "ERROR \n",'s','n', 2);
+	    joaquin_getCaracter(&seguir, "Desea dar de alta otro avion? \n (s/n): ", "ERROR!!!\n",'s','n', 2);
 	    }while(seguir == 's');
 	    }
 	    return retorno;
@@ -130,7 +130,7 @@ int mostrarAvion(int idAvion,eFecha fecha, int idViaje, int idMarca,int matricul
     	cargarDescripcionMarcaDesdeId(idMarca,aMarcas,tamM,descripcionM);
     	cargarDescripcionViajeDesdeId(idViaje,aViajes, tamV, descripcionV);
 
-    	printf("%d       %-10s %-20s %-10d %-10d  %-7d          %.2d/%.2d/%.2d \n", idAvion, descripcionV,descripcionM,matricula, modelo,cantAsientos,fecha);
+    	printf("%d       %-10s %-20s %-10d %-10d  %-7d          %.2d/%.2d/%.2d \n", idAvion, descripcionV,descripcionM,matricula, modelo,cantAsientos,fecha.dia,fecha.mes,fecha.anio);
     	retorno = 1;
     }
   return retorno;
@@ -177,21 +177,21 @@ int bajaAvion(eAvion aAviones[],int tamA, eViaje aViajes[],int tamV,eMarca aMarc
     if(aAviones != NULL && aViajes != NULL && aMarcas != NULL && tamA > 0 && tamV > 0 && tamM > 0){
     do{
     mostrarAviones(aAviones,tamA,aViajes,tamV,aMarcas,tamM);
-    joaquin_getNumero(&idAvion,"\nIngrese el id del avion que quiere dar de baja: ", "\nERROR!!!",500,1000,2);
+    joaquin_getNumero(&idAvion,"Ingrese el id del avion que quiere dar de baja: \n", "ERROR!!!\n",500,1000,2);
     posicion = buscarAvion(aAviones,tamA, &idAvion);
     //Valido que el id que ingrese el usuario es alguno de los que estan dados de alta
     while(posicion == -1){
-    printf("ERROR. El id ingresado es invalido \n ");
+    printf("ERROR... El id ingresado es invalido \n");
     mostrarAviones(aAviones,tamA,aViajes,tamV,aMarcas,tamM);
-    joaquin_getNumero(&idAvion,"\n Ingrese el id del avion que quiere dar de baja: ", "\nERROR!!!",500,1000,2);
+    joaquin_getNumero(&idAvion,"Ingrese el id del avion que quiere dar de baja: \n", "ERROR!!!\n",500,1000,2);
     posicion = buscarAvion(aAviones,tamA, &idAvion);
     }
-    joaquin_getCaracter(&confirmar, "Esta seguro que quiere eliminar este avion?\n (s/n): ", "\nERROR!!!",'s','n', 2);
+    joaquin_getCaracter(&confirmar, "Esta seguro que quiere eliminar este avion?\n (s/n): ", "ERROR!!!\n",'s','n', 2);
     if(confirmar == 's'){
     	aAviones[posicion].isEmpty = 1;
     	retorno = 1;
     }
-    joaquin_getCaracter(&seguir, "Desea dar de baja otro avion? \n (s/n): ", "\nERROR!!!",'s','n', 2);
+    joaquin_getCaracter(&seguir, "Desea dar de baja otro avion? \n (s/n): ", "ERROR!!!\n",'s','n', 2);
     }while(seguir == 's');
     }
     return retorno;
@@ -206,18 +206,18 @@ int modificarAvion(eAvion aAviones[],int tamA,eViaje aViajes[],int tamV,eMarca a
     if(aAviones != NULL && aViajes != NULL && aMarcas != NULL && tamA > 0 && tamV > 0 && tamM > 0){
         do{
     mostrarAviones(aAviones,tamA,aViajes, tamV, aMarcas, tamM);
-    joaquin_getNumero(&idAvion,"\n Ingrese el id del avion que quiere modificar: ", "ERROR. El dato ingresado es invalido ",500,1000,2);
+    joaquin_getNumero(&idAvion,"Ingrese el id del avion que quiere modificar: \n", "ERROR!!!\n",500,1000,2);
     posicion = buscarAvion(aAviones,tamA, &idAvion);
     while( posicion == -1){
     printf("ERROR. El id ingresado es invalido \n ");
     mostrarAviones(aAviones,tamA,aViajes, tamV, aMarcas, tamM);
-    joaquin_getNumero(&idAvion,"\n Ingrese el id del avion que quiere modificar: ", "ERROR. El dato ingresado es invalido ",500,1000,2);
+    joaquin_getNumero(&idAvion,"Ingrese el id del avion que quiere modificar: \n ", "ERROR!!!\n",500,1000,2);
     posicion = buscarAvion(aAviones,tamA, &idAvion);
     }
     opcionSubMenu = menuModificaciones();
     if( opcionSubMenu == 1){
     printf(" ---- MODIFICACION DEL MODELO --- \n");
-	if(joaquin_getNumero(&aAviones[posicion].modelo,"Ingrese la matricula del avion(1000/5000): ", "ERROR. Ingrese la matricula del avion(1000/5000): ",1000,5000,2)){
+	if(joaquin_getNumero(&aAviones[posicion].modelo,"Ingrese la matricula del avion(1000/5000):\n", "ERROR!!!\n",1000,5000,2) == 1){
 		printf("Modificacion exitosa!!! \n");
 	}
 	else{
@@ -226,7 +226,7 @@ int modificarAvion(eAvion aAviones[],int tamA,eViaje aViajes[],int tamV,eMarca a
     }
     else if(opcionSubMenu == 2){
     	printf(" ---- MODIFICACION CANTIDAD DE ASIENTOS DEL AVION --- \n");
-    	if(joaquin_getNumero(&aAviones[posicion].cantAsientos,"Ingrese la cantidad de asientos que tiene el avion(30/80): ", "ERROR. Ingrese la cantidad de asientos que tiene el avion: ",30,80,2)){
+    	if(joaquin_getNumero(&aAviones[posicion].cantAsientos,"Ingrese la cantidad de asientos que tiene el avion(30/80): \n", "ERROR!!!\n",30,80,2)){
     		printf("Modificacion exitosa!!! \n");
     	}
     	else{
@@ -234,7 +234,7 @@ int modificarAvion(eAvion aAviones[],int tamA,eViaje aViajes[],int tamV,eMarca a
     	}
     }
     retorno = 1;
-    joaquin_getCaracter(&seguir, "Desea dar modificar otro avion? \n (s/n): ", "ERROR \n",'s','n', 2);
+    joaquin_getCaracter(&seguir, "Desea dar modificar otro avion? \n (s/n): ", "ERROR!!!\n",'s','n', 2);
     }while(seguir == 's');
     }
     return retorno;
@@ -283,4 +283,3 @@ int ordenarAvionPorMarca(eAvion aAviones[],int tamA, eMarca aMarcas[], int tamM)
     }
     return retorno;
 }
-

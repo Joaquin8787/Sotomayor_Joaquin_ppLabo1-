@@ -126,11 +126,12 @@ int mostrarMarcas(eMarca aMarcas[],int tamM)
     {
         if(aMarcas[i].isEmpty == 0){
         mostrarMarca(aMarcas[i].id, aMarcas,tamM);
+        retorno = 1;
         }
     }
     printf("-------------------------------------------\n");
     printf("-------------------------------------------\n");
-    retorno = 1;
+
     }
     return retorno;
 }

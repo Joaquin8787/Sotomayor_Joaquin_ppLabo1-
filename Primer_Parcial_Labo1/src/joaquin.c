@@ -29,9 +29,10 @@ static int getTextoEspecial(char* pResultado);
 
 /*******************************************************************************************************************************/
 
-int menuOpciones()
+int menuOpciones(int* opcion)
 {
     int retorno = -1;
+
     system("cls");
     printf("      *** MENU ***\n");
     printf("1) ALTA AVION \n");
@@ -41,7 +42,7 @@ int menuOpciones()
     printf("5) LISTAR VIAJES\n");
     printf("6) LISTAR MARCAS\n");
     printf("7) Salir.\n");
-    if(joaquin_getNumero(&retorno, "Ingrese una opcion: ","ERROR, opcion invalida.\n",1,7,10) == 0)
+    if(joaquin_getNumero(opcion, "Ingrese una opcion: ","ERROR, opcion invalida.\n",1,7,10)== 1)
     {
        return retorno;
     }
@@ -52,13 +53,13 @@ int menuOpciones()
 
 int menuModificaciones()
 {
-    int retorno=0;
+    int retorno= -1;
     printf("\nMENU DE MODIFICACIONES...\n");
     printf("1) MODELO \n");
     printf("2) CANTIDAD DE ASIENTOS \n");
-    if(joaquin_getNumero(&retorno, "Ingrese una opcion: ","ERROR, opcion invalida.\n",1,5,10)==-1)
+    if(joaquin_getNumero(&retorno, "Ingrese una opcion: ","ERROR, opcion invalida.\n",1,2,10)==1)
     {
-        retorno=-1;
+        return retorno;
     }
     return retorno;
 }

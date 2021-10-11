@@ -16,7 +16,7 @@
 #include <ctype.h>
 #include <string.h>
 
-int menuOpciones();
+int menuOpciones(int* opcion);
 
 int menuModificaciones();
 
