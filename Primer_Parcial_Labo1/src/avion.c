@@ -92,23 +92,23 @@ int altaAviones(eAvion aAviones[],int tamA,int* idAvion,eViaje aViajes[],int tam
 	        	aAviones[posicion].fecha = auxFecha;
 	        }
 	    	mostrarViajes(aViajes,tamV);
-	    	joaquin_getNombre(auxViaje, "Ingrese el nombre del viaje que realiza: \n", "ERROR, tipo de dato no valido\n", TEXT_SIZE, 2);
+	    	joaquin_getNombre(auxViaje, "Ingrese el nombre del viaje que realiza: \n", "ERROR!!!\n", TEXT_SIZE, 2);
 	        idAuxV = mostrarIdViajeDesdeDescripcion(aViajes,tamV, auxViaje);
 	        while(idAuxV == -1){
 	        printf("El nombre del viaje que ingreso no existe \n");
 	        mostrarViajes(aViajes,tamV);
-	        joaquin_getNombre(auxViaje, "Ingrese el nombre del viaje que realiza: \n", "ERROR, tipo de dato no valido\n", TEXT_SIZE, 2);
+	        joaquin_getNombre(auxViaje, "Ingrese el nombre del viaje que realiza: \n", "ERROR!!!\n", TEXT_SIZE, 2);
 	        idAuxV = mostrarIdViajeDesdeDescripcion(aViajes,tamV, auxViaje);
 	        }
 	        aAviones[posicion].idViaje = idAuxV;
 
 	        mostrarMarcas(aMarcas,tamM);
-	        joaquin_getNombre(auxMarca, "Ingrese el nombre de la marca del avion: \n","ERROR, tipo de dato no valido\n", TEXT_SIZED, 2);
+	        joaquin_getNombre(auxMarca, "Ingrese el nombre de la marca del avion: \n","ERROR!!!\n", TEXT_SIZED, 2);
 	        idAuxM = mostrarIdMarcaDesdeDescripcion(aMarcas,tamM, auxMarca);
 	        while(idAuxM == -1){
 	        printf("El nombre de la marca que ingreso no existe \n");
 	        mostrarMarcas(aMarcas,tamM);
-	        joaquin_getNombre(auxMarca, "Ingrese el nombre de la marca del avion: \n","ERROR, tipo de dato no valido\n", TEXT_SIZED, 2);
+	        joaquin_getNombre(auxMarca, "Ingrese el nombre de la marca del avion: \n","ERROR!!!\n", TEXT_SIZED, 2);
 	        idAuxM = mostrarIdMarcaDesdeDescripcion(aMarcas,tamM, auxMarca);
 	       }
 	        aAviones[posicion].idMarca = idAuxM;

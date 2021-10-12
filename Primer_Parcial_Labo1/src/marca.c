@@ -50,33 +50,65 @@ int altaMarca(eMarca aMarcas[],int tamM,int* idMarcas){
 }
 int bajaMarcas(eMarca aMarcas[],int tamM){
     int retorno = -1;
-    int idMarcas;
+    int idMarca;
     int posicion;
     char confirmar;
     char seguir = 's';
     if(aMarcas != NULL && tamM > 0){
     do{
     mostrarMarcas(aMarcas,tamM);
-    joaquin_getNumero(&idMarcas,"Ingrese el id de la marca que quiere dar de baja: ", "ERROR. el id del avion debe ser a partir del 1000",500,1000,2);
-    posicion = buscarMarcaId(aMarcas,tamM,&idMarcas);
+    joaquin_getNumero(&idMarca,"Ingrese el id de la marca que quiere dar de baja: ", "ERROR. el id del avion debe ser a partir del 1000",1000,2000,2);
+    posicion = buscarMarcaId(aMarcas,tamM,&idMarca);
     //valido que el id de la marca que ingreso el usuario este dado de alta
     while(posicion == -1){
+    	printf("ERROR... El id ingresado no existe \n");
     	mostrarMarcas(aMarcas,tamM);
-    	joaquin_getNumero(&idMarcas,"Ingrese el id de la marca que quiere dar de baja: ", "ERROR. el id del avion debe ser a partir del 1000",500,1000,2);
-    	posicion = buscarMarcaId(aMarcas,tamM,&idMarcas);
+    	joaquin_getNumero(&idMarca,"Ingrese el id de la marca que quiere dar de baja: ", "ERROR. el id del avion debe ser a partir del 1000",1000,2000,2);
+    	posicion = buscarMarcaId(aMarcas,tamM,&idMarca);
     }
-    joaquin_getCaracter(&confirmar, "Esta seguro que quiere eliminar esta marca?\n (s/n): ", "ERROR \n",'s','n', 2);
+    joaquin_getCaracter(&confirmar, "Esta seguro que quiere modificar esta marca?\n (s/n): ", "ERROR \n",'s','n', 2);
     if(confirmar == 's'){
     	aMarcas[posicion].isEmpty = 1;
     	retorno = 1;
     }
-
     joaquin_getCaracter(&seguir, "Desea dar de baja otra marca? \n (s/n): ", "ERROR \n",'s','n', 2);
-    scanf("%c", &seguir);
     }while(seguir == 's');
     }
     return retorno;
 }
+int modificarMarca(eMarca aMarcas[],int tamM){
+    int retorno = -1;
+    int posicion;
+    int idMarca;
+    char auxDescripcion[TEXT_SIZED];
+    char seguir = 's';
+    if(aMarcas != NULL && tamM > 0){
+    do{
+    	mostrarMarcas(aMarcas,tamM);
+    	joaquin_getNumero(&idMarca,"Ingrese el id de la marca que quiere modificar: ", "ERROR. el id del avion debe ser a partir del 1000\n",1000,2000,2);
+    	posicion = buscarMarcaId(aMarcas,tamM,&idMarca);
+        while( posicion == -1){
+    	printf("ERROR... El id ingresado no existe \n");
+    	mostrarMarcas(aMarcas,tamM);
+    	joaquin_getNumero(&idMarca,"Ingrese el id de la marca que quiere modificar: ", "ERROR. el id del avion debe ser a partir del 1000\n",1000,2000,2);
+    	posicion = buscarMarcaId(aMarcas,tamM,&idMarca);
+    }
+    if(posicion != -1){
+    printf(" ---- MODIFICACION DESCRIPCION --- \n");
+	if(joaquin_getNombre(auxDescripcion, "Ingrese el nombre de la marca: \n", "ERROR!!!\n", TEXT_SIZED, 2) == 1){
+		printf("Modificacion exitosa!!! \n");
+		retorno = 1;
+	}
+	else{
+		printf("Hubo un error al modificar la descripcion de la marca\n");
+	}
+    }
+    joaquin_getCaracter(&seguir, "Desea dar modificar otra marca? \n (s/n): ", "ERROR!!!\n",'s','n', 2);
+    }while(seguir == 's');
+    }
+    return retorno;
+}
+
 int buscarLibreMarca(eMarca aMarcas[], int tamM, int* posicion){
     int retorno = -1;
     if(aMarcas != NULL && posicion != NULL &&tamM > 0){

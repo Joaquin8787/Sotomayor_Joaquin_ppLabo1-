@@ -35,7 +35,7 @@ int altaViaje(eViaje aViajes[],int tamV,int* idViaje){
     do{
     if(buscarLibreViaje(aViajes,tamV, &posicion) == 1){
 
-    if(joaquin_getNombre(auxDescripcion, "Ingrese el nombre del viaje: \n", "ERROR, tipo de dato no valido\n", TEXT_SIZE, 2) == 1
+    if(joaquin_getNombre(auxDescripcion, "Ingrese el nombre del viaje: \n", "ERROR!!!\n", TEXT_SIZE, 2) == 1
     	&& joaquin_getNumeroFlotante(&auxKms,"Ingrese la cantidad de kms que recorre: ","ERROR!!!\n",80,5000,2) == 1){
     	 strcpy(aViajes[posicion].descripcion,auxDescripcion);
     	 aViajes[posicion].kms = auxKms;
@@ -46,7 +46,7 @@ int altaViaje(eViaje aViajes[],int tamV,int* idViaje){
     }
     }
     else{
-        printf("No hay posiciones disponible para ingresar otr viaje");
+        printf("No hay posiciones disponible para ingresar otro viaje");
     }
     joaquin_getCaracter(&seguir, "Desea dar de alta otro viaje? \n (s/n): ", "ERROR \n",'s','n', 2);
     }while(seguir == 's');
@@ -62,21 +62,61 @@ int bajaViajes(eViaje aViajes[],int tamV){
     if(aViajes != NULL && tamV > 0){
         do{
     mostrarViajes(aViajes,tamV);
-    joaquin_getNumero(&idViaje,"Ingrese el id del viaje que quiere dar de baja: ", "ERROR. el id del avion debe ser a partir del 100\n",100,1000,2);
+    joaquin_getNumero(&idViaje,"Ingrese el id del viaje que quiere dar de baja: ", "ERROR. el id del viaje debe ser a partir del 100\n",100,1000,2);
     posicion = buscarViajeId(aViajes,tamV,&idViaje);
     //Valido
     while(posicion == -1){
-    	printf("El id ingresado no existe \n");
+    	printf("ERROR... El id ingresado no existe \n");
     	mostrarViajes(aViajes,tamV);
-    	joaquin_getNumero(&idViaje,"Ingrese el id del viaje que quiere dar de baja: ", "ERROR. el id del avion debe ser a partir del 100\n",100,1000,2);
+    	joaquin_getNumero(&idViaje,"Ingrese el id del viaje que quiere dar de baja: ", "ERROR. el id del viaje debe ser a partir del 100\n",100,1000,2);
     	posicion = buscarViajeId(aViajes,tamV,&idViaje);
     }
-    joaquin_getCaracter(&confirmar, "Esta seguro que quiere eliminar esta marca?\n (s/n): ", "ERROR \n",'s','n', 2);
+    joaquin_getCaracter(&confirmar, "Esta seguro que quiere eliminar este viaje?\n (s/n): ", "ERROR \n",'s','n', 2);
     if(confirmar == 's'){
     	aViajes[posicion].isEmpty = 1;
     	retorno = 1;
     }
     joaquin_getCaracter(&seguir, "Desea dar de alta otro viaje? \n (s/n): ", "ERROR \n",'s','n', 2);
+    }while(seguir == 's');
+    }
+    return retorno;
+}
+int modificarViaje(eViaje aViajes[],int tamV){
+    int retorno = -1;
+    int posicion;
+    int idViaje;
+    int opcionSubMenu;
+    char seguir = 's';
+    if(aViajes != NULL && tamV > 0){
+    do{
+    	mostrarViajes(aViajes,tamV); //MUESTRO LOS VIAJES
+    	joaquin_getNumero(&idViaje,"Ingrese el id del viaje que quiere dar de baja: ", "ERROR. el id del viaje debe ser a partir del 100\n",100,1000,2);
+    	posicion = buscarViajeId(aViajes,tamV,&idViaje); //GUARDO EL INDICE EN POSICION
+        while( posicion == -1){
+    	printf("ERROR... El id ingresado no existe \n");
+    	mostrarViajes(aViajes,tamV);
+    	joaquin_getNumero(&idViaje,"Ingrese el id del viaje que quiere dar de baja: ", "ERROR. el id del viaje debe ser a partir del 100\n",100,1000,2);
+    	posicion = buscarViajeId(aViajes,tamV,&idViaje);
+    }
+    opcionSubMenu= menuModificacionesV();
+    if(opcionSubMenu == 1){
+	if(joaquin_getNombre(aViajes[posicion].descripcion, "Ingrese el nombre de la marca: \n", "ERROR!!!\n", TEXT_SIZE, 2) == 1){
+		printf("Modificacion exitosa!!! \n");
+		retorno = 1;
+	}
+	else{
+		printf("Hubo un error al modificar la descripcion del viaje\n");
+	}
+    }
+    else if(opcionSubMenu == 2){
+    	if(joaquin_getNumeroFlotante(&aViajes[posicion].kms,"Ingrese la cantidad de kms que recorre: ","ERROR!!!\n",80,5000,2)){
+
+    	}
+    	else{
+    		printf("Hubo un error al modificar los kms del viaje\n");
+    	}
+    }
+    joaquin_getCaracter(&seguir, "Desea dar modificar otra viaje? \n (s/n): ", "ERROR!!!\n",'s','n', 2);
     }while(seguir == 's');
     }
     return retorno;

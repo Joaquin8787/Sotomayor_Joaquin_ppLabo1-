@@ -44,7 +44,7 @@ int menuOpciones(int* opcion)
     printf("7) Salir.\n");
     if(joaquin_getNumero(opcion, "Ingrese una opcion: ","ERROR, opcion invalida.\n",1,7,10) == 1)
     {
-       return retorno;
+      retorno = 1;
     }
     return retorno;
 }
@@ -64,6 +64,20 @@ int menuModificaciones()
     return retorno;
 }
 
+/*******************************************************************************************************************************/
+
+int menuModificacionesV()
+{
+    int retorno= -1;
+    printf("\nMENU DE MODIFICACIONES...\n");
+    printf("1) DESCRIPCION \n");
+    printf("2) KMS \n");
+    if(joaquin_getNumero(&retorno, "Ingrese una opcion: ","ERROR, opcion invalida.\n",1,2,10)==1)
+    {
+        return retorno;
+    }
+    return retorno;
+}
 /*******************************************************************************************************************************/
 
 int joaquin_getNumero(int* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos)
