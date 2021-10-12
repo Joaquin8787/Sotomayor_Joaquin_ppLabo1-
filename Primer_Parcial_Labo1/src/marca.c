@@ -27,12 +27,12 @@ int altaMarca(eMarca aMarcas[],int tamM,int* idMarcas){
     int retorno = -1;
     int posicion;
     char seguir = 's';
-    char auxDescripcion[20];
+    char auxDescripcion[TEXT_SIZED];
 
      if(aMarcas != NULL && idMarcas != NULL &&tamM > 0){
     do{
     if(buscarLibreMarca(aMarcas,tamM, &posicion) == 1){
-    	if(joaquin_getNombre(auxDescripcion, "Ingrese el nombre de la marca: \n", "ERROR, tipo de dato no valido\n", 20, 2) == 0){
+    	if(joaquin_getNombre(auxDescripcion, "Ingrese el nombre de la marca: \n", "ERROR, tipo de dato no valido\n", TEXT_SIZED, 2) == 1){
     		strcpy(aMarcas[posicion].descripcion, auxDescripcion);
     		aMarcas[posicion].isEmpty = 0;
     	    aMarcas[posicion].id = *idMarcas;
@@ -106,10 +106,10 @@ int buscarMarcaId(eMarca aMarcas[], int tamM, int* idMarcas){
 int mostrarMarca(int idMarca,eMarca aMarcas[],int tamM)
 {
     int retorno = -1;
-    char descripcion[20];
+    char descripcion[TEXT_SIZED];
     if(descripcion != NULL && aMarcas != NULL){
     cargarDescripcionMarcaDesdeId(idMarca,aMarcas,tamM,descripcion);
-    printf("%d              %-20s \n", idMarca, descripcion);
+    printf("%d       %-20s \n", idMarca, descripcion);
     retorno = 1;
     }
   return retorno;
@@ -121,7 +121,7 @@ int mostrarMarcas(eMarca aMarcas[],int tamM)
     if(aMarcas != NULL &&tamM >0){
     printf("-------------------------------------------\n");
     printf("-------------------------------------------\n");
-    printf("idMarca    descripcion \n");
+    printf("idMarca    DESCRIPCION \n");
     for (int i=0; i<tamM; i++)
     {
         if(aMarcas[i].isEmpty == 0){

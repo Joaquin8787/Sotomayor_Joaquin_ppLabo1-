@@ -33,8 +33,8 @@ int menuOpciones(int* opcion)
 {
     int retorno = -1;
 
-    system("cls");
-    printf("      *** MENU ***\n");
+    //system("cls");
+    printf(" ---- MENU ----\n");
     printf("1) ALTA AVION \n");
     printf("2) MODIFICAR AVION \n");
     printf("3) BAJA AVION \n");
@@ -42,7 +42,7 @@ int menuOpciones(int* opcion)
     printf("5) LISTAR VIAJES\n");
     printf("6) LISTAR MARCAS\n");
     printf("7) Salir.\n");
-    if(joaquin_getNumero(opcion, "Ingrese una opcion: ","ERROR, opcion invalida.\n",1,7,10)== 1)
+    if(joaquin_getNumero(opcion, "Ingrese una opcion: ","ERROR, opcion invalida.\n",1,7,10) == 1)
     {
        return retorno;
     }
@@ -75,7 +75,7 @@ int joaquin_getNumero(int* pResultado, char* mensaje, char* mensajeError, int mi
     {
         do{
             printf("%s",mensaje);
-            if(getInt(&bufferInt)==0 && bufferInt>=minimo && bufferInt<=maximo)
+            if(getInt(&bufferInt)== 0 && bufferInt>=minimo && bufferInt<=maximo)
             {
                 *pResultado = bufferInt;
                 retorno = 1;
@@ -213,7 +213,7 @@ int joaquin_getCaracter(char* pResultado, char* mensaje,char* mensajeError, char
 			if(getCharacter(&bufferChar)==0 && (bufferChar==opcion1 || bufferChar==opcion2))
 			{
 				*pResultado=bufferChar;
-				retorno = 0;
+				retorno = 1;
 				break;
 			}
 			printf("%s",mensajeError);
@@ -282,7 +282,7 @@ int joaquin_getNombre(char* pResultado, char* mensaje, char* mensajeError, int s
             if(getCadenaChar(bufferNombre)==0)
             {
                 strcpy(pResultado,bufferNombre);
-				retorno = 0;
+				retorno = 1;
 				break;
             }
             reintentos--;
@@ -360,7 +360,7 @@ int joaquin_getNumeroFlotante(float* pResultado, char* mensaje, char* mensajeErr
 			if(getFloat(&bufferFloat)==0 && bufferFloat >= minimo && bufferFloat <= maximo)
 			{
 				*pResultado = bufferFloat;
-				retorno = 0;
+				retorno = 1;
 				break;
 			}
 			reintentos--;

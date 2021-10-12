@@ -39,16 +39,6 @@ int main(void) {
 			{103, "Corrientes", 670},
 			{104, "Chubut", 1735.8,0}};
 
-	/*
-	 int idAvion;
-     int matricula;
-     int idViaje;
-     int idMarca;
-     int modelo;
-     int cantAsientos;
-     int isEmpty;
-	 */
-
     eAvion arrayAviones[TAM_AVION] = {
     		{500,{6,9,2021},2500,100,1002,1998,20,0},
 			{501,{23,11,2021},2500,103,1002,2004,60,0},
@@ -57,7 +47,7 @@ int main(void) {
 
     //int idMarca = 1000;
     //int idViaje = 100;
-    int idAvion = 500;
+      int idAvion = 500;
 
 	char salir = 'n';
 	//inicializarArrayAviones(arrayAviones,TAM_AVION);
@@ -123,9 +113,7 @@ int main(void) {
 			getchar();
 		break;
 		case 7:
-			printf("Esta seguro de que quiere salir? \n");
-		    fflush(stdin);
-		    scanf("%c",&salir);
+			joaquin_getCaracter(&salir, "Esta seguro que quiere salir? \n (s/n): ", "ERROR!!!\n",'s','n', 2);
 	   break;
 		}
 
