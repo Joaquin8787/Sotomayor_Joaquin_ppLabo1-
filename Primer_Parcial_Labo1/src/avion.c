@@ -265,7 +265,7 @@ int ordenarAvionPorMarca(eAvion aAviones[],int tamA, eMarca aMarcas[], int tamM)
     {
     	retorno=0;
     	//BURBUJEO
-        for(int i=0; i<tamA-1 && !aAviones[i].isEmpty; i++) //RECORRO HASTA QUE
+        for(int i=0; i<tamA-1 && !aAviones[i].isEmpty; i++) //RECORRO HASTA QUE NO ESTE VACIO
         {
         	cargarDescripcionMarcaDesdeId(aAviones[i].idMarca ,aMarcas,tamM,descripcion); //CARGO LA PRIMERA DESCRIPCION DE LA MARCA
             for(int j=i+1; j<tamA && !aAviones[j].isEmpty; j++)

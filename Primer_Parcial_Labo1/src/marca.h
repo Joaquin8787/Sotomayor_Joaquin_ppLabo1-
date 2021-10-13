@@ -23,6 +23,7 @@ typedef struct{
 /// @param aMarcas[] eMarca array de aviones
 /// @param tamM int tamaño del array de marcas
 /// @return int retorna 1 si el array esta vacio y -1 si no lo esta
+
 int arrayVacioMarcas(eMarca aMarcas[], int tamM);
 
 /// @brief muestra por pantalla 1 marca

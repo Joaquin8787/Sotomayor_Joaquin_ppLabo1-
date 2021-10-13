@@ -10,11 +10,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <ctype.h>
 #include <string.h>
 #include "joaquin.h"
-#include "avion.h"
+#include "informes.h"
 
 
 #define TAM_MAR 4
@@ -40,8 +39,8 @@ int main(void) {
 			{104, "Chubut", 1735.8,0}};
 
     eAvion arrayAviones[TAM_AVION] = {
-    		{500,{6,9,2021},2500,100,1002,1998,20,0},
-			{501,{23,11,2021},2500,103,1002,2004,60,0},
+    		{500,{23,11,2021},2500,102,1003,1998,20,0},
+			{501,{23,11,2021},2500,104,1003,1998,60,0},
 			{502,{4,1,2022},4000,104,1004,1999,50,0}
     };
 
@@ -50,7 +49,7 @@ int main(void) {
       int idAvion = 500;
 
 	char salir = 'n';
-	//inicializarArrayAviones(arrayAviones,TAM_AVION);
+	inicializarArrayAviones(arrayAviones,TAM_AVION);
 	do{
 		menuOpciones(&opcionMenu);
 		switch(opcionMenu){
@@ -113,8 +112,39 @@ int main(void) {
 			getchar();
 		break;
 		case 'g':
-			joaquin_getCaracter(&salir, "Esta seguro que quiere salir? \n (s/n): ", "ERROR!!!\n",'n','s', 2);
+			if(arrayVacioAvion(arrayAviones,TAM_AVION) == -1){
+				switch(menuInformes()){
+				case 1:
+				mostrarAvionesBoing(arrayAviones,TAM_AVION,arrayViajes,TAM_VIA,arrayMarcas,TAM_MAR);
+				break;
+				case 2:
+				informarAvionporMarca(arrayAviones,TAM_AVION,arrayViajes,TAM_VIA,arrayMarcas,TAM_MAR);
+				break;
+				case 3:
+				if(mostrarMatriculaYMarcaNeuquen(arrayAviones,TAM_AVION,arrayViajes,TAM_VIA,arrayMarcas,TAM_MAR)== -1){
+				printf("No hay aviones que viaje a Neuquen \n");
+				}
+
+				break;
+				case 4:
+				mostrarKmsRecorridosPorATR(arrayAviones,TAM_AVION,arrayViajes,TAM_VIA,arrayMarcas,TAM_MAR);
+				break;
+				case 5:
+				informarCantidadAsientosporModelo(arrayAviones,TAM_AVION);
+				break;
+				case 6:
+				promedioAvionesPorFecha(arrayAviones,TAM_AVION,arrayViajes,TAM_VIA);
+				break;
+
+				}
+			}
+			else{
+				printf("Primero debe dar de alta algun avion \n");
+			}
 	   break;
+		case 'H':
+					joaquin_getCaracter(&salir, "Esta seguro que quiere salir? \n (s/n): ", "ERROR!!!\n",'n','s', 2);
+			   break;
 		}
 
 	}while(salir == 'n' );

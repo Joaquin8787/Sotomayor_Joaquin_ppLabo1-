@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-
+int menuInformes();
 /// @brief imprime por pantalla una lista de opciones, le pide al usuario que ingrese una opcion y la guarda en una variable
 ///
 /// @param opcion char* direccion de memoria donde se guarda la opcion

@@ -5,7 +5,6 @@
  *      Author: Usuario
  */
 
-
 #include "joaquin.h"
 
 //GET NUMERO
@@ -34,17 +33,39 @@ int menuOpciones(char* opcion)
     int retorno = -1;
 
     //system("cls");
-    printf(" ---- MENU ----\n");
+    printf(" ---- MENU ---- \n");
     printf("A) ALTA AVION \n");
     printf("B) MODIFICAR AVION \n");
     printf("C) BAJA AVION \n");
     printf("D) LISTAR AVIONES\n");
     printf("E) LISTAR VIAJES\n");
     printf("F) LISTAR MARCAS\n");
-    printf("G) Salir.\n");
-    if(joaquin_getCaracter(opcion, "Ingrese una opcion: ", "ERROR opcion invalida. \n",'a','g', 2) == 1)
+    printf("G) INFORMES \n");
+    printf("H) Salir.\n");
+    if(joaquin_getCaracter(opcion, "Ingrese una opcion: ", "ERROR opcion invalida. \n",'a','h', 2) == 1)
     {
     	retorno = 1;
+    }
+    return retorno;
+}
+
+/*******************************************************************************************************************************/
+int menuInformes()
+{
+    int retorno = -1;
+
+    //system("cls");
+    printf(" ---- MENU INFORMES ----\n");
+    printf("1) Mostrar todos los aviones Boeing \n");
+    printf("2) - Mostrar aviones de una marca seleccionada\n");
+    printf("3) Mostrar la matrícula y marca de los aviones que viajaron a Neuquén \n");
+    printf("4) Informar los kms totales recorridos por los aviones marca ATR\n");
+    printf("5) Informar la cantidad total de asientos para un modelo de avión seleccionado\n");
+    printf("6) Promedio de kms para los aviones que viajaron en una fecha seleccionada\n");
+    printf("7) Salir.\n");
+    if(joaquin_getNumero(&retorno, "Ingrese una opcion: ","ERROR, opcion invalida.\n",1,7,10)==1)
+     {
+            return retorno;
     }
     return retorno;
 }
