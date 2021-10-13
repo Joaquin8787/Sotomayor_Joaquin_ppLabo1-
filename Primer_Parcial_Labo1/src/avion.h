@@ -128,3 +128,4 @@ int arrayVacioAvion(eAvion aAviones[], int tamA);
 /// @param tamM int tamaño del array de marcas
 /// @return int retorna 1 si pudo ordenar el array de aviones y -1 si no lo logro
 int ordenarAvionPorMarca(eAvion aAviones[],int tamA, eMarca aMarcas[], int tamM);
+int mostrarAvionMayorAsientos(eAvion aAviones[], int tamA);

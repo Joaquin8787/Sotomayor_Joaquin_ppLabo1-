@@ -35,7 +35,7 @@ int altaViaje(eViaje aViajes[],int tamV,int* idViaje){
     do{
     if(buscarLibreViaje(aViajes,tamV, &posicion) == 1){
 
-    if(joaquin_getNombre(auxDescripcion, "Ingrese el nombre del viaje: \n", "ERROR!!!\n", TEXT_SIZE, 2) == 1
+    if(joaquin_getString(auxDescripcion, "Ingrese el nombre del viaje: \n", "ERROR!!!\n", TEXT_SIZE, 2) == 1
     	&& joaquin_getNumeroFlotante(&auxKms,"Ingrese la cantidad de kms que recorre: ","ERROR!!!\n",80,5000,2) == 1){
     	 strcpy(aViajes[posicion].descripcion,auxDescripcion);
     	 aViajes[posicion].kms = auxKms;
@@ -48,7 +48,7 @@ int altaViaje(eViaje aViajes[],int tamV,int* idViaje){
     else{
         printf("No hay posiciones disponible para ingresar otro viaje");
     }
-    joaquin_getCaracter(&seguir, "Desea dar de alta otro viaje? \n (s/n): ", "ERROR \n",'s','n', 2);
+    joaquin_getCaracter(&seguir, "Desea dar de alta otro viaje? \n (s/n): ", "ERROR \n",'n','s', 2);
     }while(seguir == 's');
     }
     return retorno;
@@ -71,12 +71,12 @@ int bajaViajes(eViaje aViajes[],int tamV){
     	joaquin_getNumero(&idViaje,"Ingrese el id del viaje que quiere dar de baja: ", "ERROR. el id del viaje debe ser a partir del 100\n",100,1000,2);
     	posicion = buscarViajeId(aViajes,tamV,&idViaje);
     }
-    joaquin_getCaracter(&confirmar, "Esta seguro que quiere eliminar este viaje?\n (s/n): ", "ERROR \n",'s','n', 2);
+    joaquin_getCaracter(&confirmar, "Esta seguro que quiere eliminar este viaje?\n (s/n): ", "ERROR \n",'n','s', 2);
     if(confirmar == 's'){
     	aViajes[posicion].isEmpty = 1;
     	retorno = 1;
     }
-    joaquin_getCaracter(&seguir, "Desea dar de alta otro viaje? \n (s/n): ", "ERROR \n",'s','n', 2);
+    joaquin_getCaracter(&seguir, "Desea dar de alta otro viaje? \n (s/n): ", "ERROR \n",'n','s', 2);
     }while(seguir == 's');
     }
     return retorno;
@@ -100,7 +100,7 @@ int modificarViaje(eViaje aViajes[],int tamV){
     }
     opcionSubMenu= menuModificacionesV();
     if(opcionSubMenu == 1){
-	if(joaquin_getNombre(aViajes[posicion].descripcion, "Ingrese el nombre de la marca: \n", "ERROR!!!\n", TEXT_SIZE, 2) == 1){
+	if(joaquin_getString(aViajes[posicion].descripcion, "Ingrese el nombre de la marca: \n", "ERROR!!!\n", TEXT_SIZE, 2) == 1){
 		printf("Modificacion exitosa!!! \n");
 		retorno = 1;
 	}
@@ -116,7 +116,7 @@ int modificarViaje(eViaje aViajes[],int tamV){
     		printf("Hubo un error al modificar los kms del viaje\n");
     	}
     }
-    joaquin_getCaracter(&seguir, "Desea dar modificar otra viaje? \n (s/n): ", "ERROR!!!\n",'s','n', 2);
+    joaquin_getCaracter(&seguir, "Desea dar modificar otra viaje? \n (s/n): ", "ERROR!!!\n",'n','s', 2);
     }while(seguir == 's');
     }
     return retorno;

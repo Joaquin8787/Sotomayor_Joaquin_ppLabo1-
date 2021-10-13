@@ -8,7 +8,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <string.h>
 #include "joaquin.h"
 #include "avion.h"
 
@@ -92,23 +91,23 @@ int altaAviones(eAvion aAviones[],int tamA,int* idAvion,eViaje aViajes[],int tam
 	        	aAviones[posicion].fecha = auxFecha;
 	        }
 	    	mostrarViajes(aViajes,tamV);
-	    	joaquin_getNombre(auxViaje, "Ingrese el nombre del viaje que realiza: \n", "ERROR!!!\n", TEXT_SIZE, 2);
+	    	joaquin_getString(auxViaje, "Ingrese el nombre del viaje que realiza: \n", "ERROR!!!\n", TEXT_SIZE, 2);
 	        idAuxV = mostrarIdViajeDesdeDescripcion(aViajes,tamV, auxViaje);
 	        while(idAuxV == -1){
 	        printf("El nombre del viaje que ingreso no existe \n");
 	        mostrarViajes(aViajes,tamV);
-	        joaquin_getNombre(auxViaje, "Ingrese el nombre del viaje que realiza: \n", "ERROR!!!\n", TEXT_SIZE, 2);
+	        joaquin_getString(auxViaje, "Ingrese el nombre del viaje que realiza: \n", "ERROR!!!\n", TEXT_SIZE, 2);
 	        idAuxV = mostrarIdViajeDesdeDescripcion(aViajes,tamV, auxViaje);
 	        }
 	        aAviones[posicion].idViaje = idAuxV;
 
 	        mostrarMarcas(aMarcas,tamM);
-	        joaquin_getNombre(auxMarca, "Ingrese el nombre de la marca del avion: \n","ERROR!!!\n", TEXT_SIZED, 2);
+	        joaquin_getString(auxMarca, "Ingrese el nombre de la marca del avion: \n","ERROR!!!\n", TEXT_SIZED, 2);
 	        idAuxM = mostrarIdMarcaDesdeDescripcion(aMarcas,tamM, auxMarca);
 	        while(idAuxM == -1){
 	        printf("El nombre de la marca que ingreso no existe \n");
 	        mostrarMarcas(aMarcas,tamM);
-	        joaquin_getNombre(auxMarca, "Ingrese el nombre de la marca del avion: \n","ERROR!!!\n", TEXT_SIZED, 2);
+	        joaquin_getString(auxMarca, "Ingrese el nombre de la marca del avion: \n","ERROR!!!\n", TEXT_SIZED, 2);
 	        idAuxM = mostrarIdMarcaDesdeDescripcion(aMarcas,tamM, auxMarca);
 	       }
 	        aAviones[posicion].idMarca = idAuxM;
@@ -129,7 +128,7 @@ int altaAviones(eAvion aAviones[],int tamA,int* idAvion,eViaje aViajes[],int tam
 	    else{
 	        printf("No hay posiciones disponible para ingresar otro avion \n ");
 	    }
-	    joaquin_getCaracter(&seguir, "Desea dar de alta otro avion? \n (s/n): ", "ERROR!!!\n",'s','n', 2);
+	    joaquin_getCaracter(&seguir, "Desea dar de alta otro avion? \n (s/n): ", "ERROR!!!\n",'n','s', 2);
 	    }while(seguir == 's');
 	    }
 	    return retorno;
@@ -200,13 +199,13 @@ int bajaAvion(eAvion aAviones[],int tamA, eViaje aViajes[],int tamV,eMarca aMarc
     joaquin_getNumero(&idAvion,"Ingrese el id del avion que quiere dar de baja: \n", "ERROR!!!\n",500,1000,2);
     posicion = buscarAvion(aAviones,tamA, &idAvion);
     }
-    joaquin_getCaracter(&confirmar, "Esta seguro que quiere eliminar este avion?\n (s/n): ", "ERROR!!!\n",'s','n', 2);
+    joaquin_getCaracter(&confirmar, "Esta seguro que quiere eliminar este avion?\n (s/n): ", "ERROR!!!\n",'n','s', 2);
     if(confirmar == 's'){
     	aAviones[posicion].isEmpty = 1;
     	printf("Baja exitosa!!!\n");
     	retorno = 1;
     }
-    joaquin_getCaracter(&seguir, "Desea dar de baja otro avion? \n (s/n): ", "ERROR!!!\n",'s','n', 2);
+    joaquin_getCaracter(&seguir, "Desea dar de baja otro avion? \n (s/n): ", "ERROR!!!\n",'n','s', 2);
     }while(seguir == 's');
     }
     return retorno;
@@ -249,7 +248,7 @@ int modificarAvion(eAvion aAviones[],int tamA,eViaje aViajes[],int tamV,eMarca a
     	}
     }
     retorno = 1;
-    joaquin_getCaracter(&seguir, "Desea dar modificar otro avion? \n (s/n): ", "ERROR!!!\n",'s','n', 2);
+    joaquin_getCaracter(&seguir, "Desea dar modificar otro avion? \n (s/n): ", "ERROR!!!\n",'n','s', 2);
     }while(seguir == 's');
     }
     return retorno;
@@ -286,3 +285,4 @@ int ordenarAvionPorMarca(eAvion aAviones[],int tamA, eMarca aMarcas[], int tamM)
     }
     return retorno;
 }
+

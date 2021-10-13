@@ -32,7 +32,7 @@ int altaMarca(eMarca aMarcas[],int tamM,int* idMarcas){
      if(aMarcas != NULL && idMarcas != NULL &&tamM > 0){
     do{
     if(buscarLibreMarca(aMarcas,tamM, &posicion) == 1){
-    	if(joaquin_getNombre(auxDescripcion, "Ingrese el nombre de la marca: \n", "ERROR, tipo de dato no valido\n", TEXT_SIZED, 2) == 1){
+    	if(joaquin_getString(auxDescripcion, "Ingrese el nombre de la marca: \n", "ERROR, tipo de dato no valido\n", TEXT_SIZED, 2) == 1){
     		strcpy(aMarcas[posicion].descripcion, auxDescripcion);
     		aMarcas[posicion].isEmpty = 0;
     	    aMarcas[posicion].id = *idMarcas;
@@ -43,7 +43,7 @@ int altaMarca(eMarca aMarcas[],int tamM,int* idMarcas){
     else{
         printf("No hay posiciones disponible para ingresar otra marca");
     }
-    joaquin_getCaracter(&seguir, "Desea dar de alta otra marca? \n (s/n): ", "ERROR \n",'s','n', 2);
+    joaquin_getCaracter(&seguir, "Desea dar de alta otra marca? \n (s/n): ", "ERROR \n",'n','s', 2);
     }while(seguir == 's');
     }
     return retorno;
@@ -66,12 +66,12 @@ int bajaMarcas(eMarca aMarcas[],int tamM){
     	joaquin_getNumero(&idMarca,"Ingrese el id de la marca que quiere dar de baja: ", "ERROR. el id del avion debe ser a partir del 1000",1000,2000,2);
     	posicion = buscarMarcaId(aMarcas,tamM,&idMarca);
     }
-    joaquin_getCaracter(&confirmar, "Esta seguro que quiere modificar esta marca?\n (s/n): ", "ERROR \n",'s','n', 2);
+    joaquin_getCaracter(&confirmar, "Esta seguro que quiere modificar esta marca?\n (s/n): ", "ERROR \n",'n','s', 2);
     if(confirmar == 's'){
     	aMarcas[posicion].isEmpty = 1;
     	retorno = 1;
     }
-    joaquin_getCaracter(&seguir, "Desea dar de baja otra marca? \n (s/n): ", "ERROR \n",'s','n', 2);
+    joaquin_getCaracter(&seguir, "Desea dar de baja otra marca? \n (s/n): ", "ERROR \n",'n','s', 2);
     }while(seguir == 's');
     }
     return retorno;
@@ -95,7 +95,7 @@ int modificarMarca(eMarca aMarcas[],int tamM){
     }
     if(posicion != -1){
     printf(" ---- MODIFICACION DESCRIPCION --- \n");
-	if(joaquin_getNombre(auxDescripcion, "Ingrese el nombre de la marca: \n", "ERROR!!!\n", TEXT_SIZED, 2) == 1){
+	if(joaquin_getString(auxDescripcion, "Ingrese el nombre de la marca: \n", "ERROR!!!\n", TEXT_SIZED, 2) == 1){
 		printf("Modificacion exitosa!!! \n");
 		retorno = 1;
 	}
@@ -103,7 +103,7 @@ int modificarMarca(eMarca aMarcas[],int tamM){
 		printf("Hubo un error al modificar la descripcion de la marca\n");
 	}
     }
-    joaquin_getCaracter(&seguir, "Desea dar modificar otra marca? \n (s/n): ", "ERROR!!!\n",'s','n', 2);
+    joaquin_getCaracter(&seguir, "Desea dar modificar otra marca? \n (s/n): ", "ERROR!!!\n",'n','s', 2);
     }while(seguir == 's');
     }
     return retorno;

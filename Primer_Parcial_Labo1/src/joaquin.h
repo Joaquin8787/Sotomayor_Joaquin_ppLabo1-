@@ -18,9 +18,9 @@
 
 /// @brief imprime por pantalla una lista de opciones, le pide al usuario que ingrese una opcion y la guarda en una variable
 ///
-/// @param opcion int* direccion de memoria donde se guarda la opcion
+/// @param opcion char* direccion de memoria donde se guarda la opcion
 /// @return int retorna 1 si pudo guardar la opcion y -1 si no lo logro
-int menuOpciones(int* opcion);
+int menuOpciones(char* opcion);
 
 /// @brief imprime por pantalla una lista de opciones de modificacion, le pide al usuario que ingrese una opcion y la guarda en una variable
 ///
@@ -77,7 +77,7 @@ int joaquin_getCaracter(char* pResultado, char* mensaje,char* mensajeError, char
 /// @param sizeNombre int tamaño limite
 /// @param reintentos int Cantidad de reintentos permitidos
 /// @return int Retorna 1 si se obtuvo el numero o -1 si no
-int joaquin_getCadenaCaracteres(char* pResultado, char* mensaje, char* mensajeError, int sizeNombre, int reintentos);
+int joaquin_getString(char* pResultado, char* mensaje, char* mensajeError, int sizeNombre, int reintentos);
 
 /// @brief Solicita una cadena de caracteres especiales al usuario, luego de verificarlo devuelve el resultado
 ///

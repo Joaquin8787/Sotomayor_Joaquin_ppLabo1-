@@ -29,22 +29,22 @@ static int getTextoEspecial(char* pResultado);
 
 /*******************************************************************************************************************************/
 
-int menuOpciones(int* opcion)
+int menuOpciones(char* opcion)
 {
     int retorno = -1;
 
     //system("cls");
     printf(" ---- MENU ----\n");
-    printf("1) ALTA AVION \n");
-    printf("2) MODIFICAR AVION \n");
-    printf("3) BAJA AVION \n");
-    printf("4) LISTAR AVIONES\n");
-    printf("5) LISTAR VIAJES\n");
-    printf("6) LISTAR MARCAS\n");
-    printf("7) Salir.\n");
-    if(joaquin_getNumero(opcion, "Ingrese una opcion: ","ERROR, opcion invalida.\n",1,7,10) == 1)
+    printf("A) ALTA AVION \n");
+    printf("B) MODIFICAR AVION \n");
+    printf("C) BAJA AVION \n");
+    printf("D) LISTAR AVIONES\n");
+    printf("E) LISTAR VIAJES\n");
+    printf("F) LISTAR MARCAS\n");
+    printf("G) Salir.\n");
+    if(joaquin_getCaracter(opcion, "Ingrese una opcion: ", "ERROR opcion invalida. \n",'a','g', 2) == 1)
     {
-      retorno = 1;
+    	retorno = 1;
     }
     return retorno;
 }
@@ -224,7 +224,7 @@ int joaquin_getCaracter(char* pResultado, char* mensaje,char* mensajeError, char
 		do
 		{
 			printf("%s",mensaje);
-			if(getCharacter(&bufferChar)==0 && (bufferChar==opcion1 || bufferChar==opcion2))
+			if(getCharacter(&bufferChar)==0 && (bufferChar >= opcion1 && bufferChar <= opcion2))
 			{
 				*pResultado=bufferChar;
 				retorno = 1;
@@ -284,7 +284,7 @@ static int esCaracter(char* cadena, int limite)
 
 /*******************************************************************************************************************************/
 
-int joaquin_getNombre(char* pResultado, char* mensaje, char* mensajeError, int sizeNombre, int reintentos)
+int joaquin_getString(char* pResultado, char* mensaje, char* mensajeError, int sizeNombre, int reintentos)
 {
     int retorno=-1;
     char bufferNombre[sizeNombre];

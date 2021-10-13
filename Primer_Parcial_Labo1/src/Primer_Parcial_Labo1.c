@@ -25,7 +25,7 @@
 int main(void) {
 	setbuf(stdout, NULL);
 
-	int opcionMenu;
+	char opcionMenu;
 	eMarca arrayMarcas[TAM_MAR] = {
 			{1001,"Boeing",0},
 			{1002,"Airbus",0},
@@ -54,7 +54,7 @@ int main(void) {
 	do{
 		menuOpciones(&opcionMenu);
 		switch(opcionMenu){
-		case 1:
+		case 'a':
 			if(altaAviones(arrayAviones,TAM_AVION,&idAvion,arrayViajes,TAM_VIA,arrayMarcas,TAM_MAR) == 1){
 				printf("Alta exitosa!!! \n");
 			}
@@ -63,7 +63,7 @@ int main(void) {
 			}
 
 	    break;
-		case 2:
+		case 'b':
 			if(arrayVacioAvion(arrayAviones,TAM_AVION) == -1){
 				modificarAvion(arrayAviones,TAM_AVION,arrayViajes,TAM_VIA,arrayMarcas,TAM_MAR);
 			}
@@ -72,7 +72,7 @@ int main(void) {
 			}
 
 		break;
-		case 3:
+		case 'c':
 			if(arrayVacioAvion(arrayAviones,TAM_AVION) == -1){
 				bajaAvion(arrayAviones,TAM_AVION,arrayViajes,TAM_VIA,arrayMarcas,TAM_MAR);
 			}
@@ -81,7 +81,7 @@ int main(void) {
 			}
 
 		break;
-		case 4:
+		case 'd':
 			if(arrayVacioAvion(arrayAviones,TAM_AVION) == -1){
 			mostrarAviones(arrayAviones,TAM_AVION,arrayViajes,TAM_VIA,arrayMarcas,TAM_MAR);
 			printf("ORDENANDO... \n");
@@ -94,7 +94,7 @@ int main(void) {
 			}
 			getchar();
 	    break;
-		case 5:
+		case 'e':
 			if(arrayVacioViajes(arrayViajes,TAM_VIA)==-1){
 			mostrarViajes(arrayViajes,TAM_VIA);
 			}
@@ -103,7 +103,7 @@ int main(void) {
 			}
 			getchar();
 		break;
-		case 6:
+		case 'f':
 			if(arrayVacioMarcas(arrayMarcas,TAM_MAR)==-1){
 				mostrarMarcas(arrayMarcas,TAM_MAR);
 		     }
@@ -112,8 +112,8 @@ int main(void) {
 			}
 			getchar();
 		break;
-		case 7:
-			joaquin_getCaracter(&salir, "Esta seguro que quiere salir? \n (s/n): ", "ERROR!!!\n",'s','n', 2);
+		case 'g':
+			joaquin_getCaracter(&salir, "Esta seguro que quiere salir? \n (s/n): ", "ERROR!!!\n",'n','s', 2);
 	   break;
 		}
 
